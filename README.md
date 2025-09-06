@@ -1,11 +1,16 @@
 # Gemini Interactive Image Recreation Tool
 
-This repository contains two implementations of a tool that uses Google's Gemini AI to recreate and enhance images. Both versions provide an interactive interface for image processing with support for reference images and custom prompts.
+This repository contains **four implementations** (2 CLI + 2 GUI) of a tool that uses Google's Gemini AI to recreate and enhance images. All versions provide intuitive interfaces for image processing with support for reference images and custom prompts.
 
 ## Files
 
-- `interactive_recreation.py` - Python implementation
-- `interactive-recreation.sh` - Bash script implementation
+### CLI Versions
+- `interactive_recreation.py` - Python CLI implementation
+- `interactive-recreation.sh` - Bash CLI script implementation
+
+### GUI Versions
+- `interactive_recreation_gui.py` - Python GUI implementation (CustomTkinter)
+- `interactive_recreation_gui.sh` - Bash GUI script implementation (Zenity)
 
 ## Features
 
@@ -18,7 +23,7 @@ This repository contains two implementations of a tool that uses Google's Gemini
 
 ## Requirements
 
-### Python Version (`interactive_recreation.py`)
+### Python CLI Version (`interactive_recreation.py`)
 
 **Required Python modules:**
 - `requests` (install with: `pip install requests`)
@@ -27,7 +32,20 @@ This repository contains two implementations of a tool that uses Google's Gemini
 - Python 3.6+
 - Internet connection for Gemini API access
 
-### Bash Version (`interactive-recreation.sh`)
+### Python GUI Version (`interactive_recreation_gui.py`)
+
+**Required Python modules:**
+- `requests` (install with: `pip install requests`)
+- `customtkinter` (install with: `pip install customtkinter`)
+- `Pillow` (install with: `pip install Pillow`)
+
+**System requirements:**
+- Python 3.6+
+- Display server (X11 on Linux)
+- Tkinter support
+- Internet connection for Gemini API access
+
+### Bash CLI Version (`interactive-recreation.sh`)
 
 **System tools:**
 - `bash` (Unix/Linux shell)
@@ -36,16 +54,35 @@ This repository contains two implementations of a tool that uses Google's Gemini
 - `grep` (for response parsing)
 - Internet connection for Gemini API access
 
+### Bash GUI Version (`interactive-recreation_gui.sh`)
+
+**System tools:**
+- `bash` (Unix/Linux shell)
+- `curl` (for API requests)
+- `base64` (for image encoding)
+- `grep` (for response parsing)
+- `zenity` (for GUI dialogs)
+- Display server (X11 on Linux)
+- Internet connection for Gemini API access
+
 ## Installation
 
-### Python Setup
+### Python CLI Setup
 1. Ensure Python 3.6+ is installed
 2. Install required module:
    ```bash
    pip install requests
    ```
 
-### Bash Setup
+### Python GUI Setup
+1. Ensure Python 3.6+ is installed
+2. Install required modules:
+   ```bash
+   pip install requests customtkinter Pillow
+   ```
+3. Ensure Tkinter is available (usually pre-installed on most systems)
+
+### Bash CLI Setup
 1. Ensure bash is available (typically pre-installed on Linux/macOS)
 2. Verify required tools are installed (curl, base64, grep)
 3. Make script executable:
@@ -53,19 +90,52 @@ This repository contains two implementations of a tool that uses Google's Gemini
    chmod +x interactive-recreation.sh
    ```
 
+### Bash GUI Setup
+1. Ensure bash is available (typically pre-installed on Linux/macOS)
+2. Install Zenity GUI toolkit:
+   ```bash
+   sudo apt-get install zenity
+   ```
+3. Verify required tools are installed (curl, base64, grep)
+4. Make script executable:
+   ```bash
+   chmod +x interactive-recreation_gui.sh
+   ```
+
 ## Usage
 
-Both versions provide interactive menus for configuration. Run either script and follow the prompts.
+### CLI Versions
+Both CLI versions provide interactive console menus for configuration. Run either script and follow the prompts.
 
-### Python Version
+**Python CLI:**
 ```bash
 python3 interactive_recreation.py
 ```
 
-### Bash Version
+**Bash CLI:**
 ```bash
 ./interactive-recreation.sh
 ```
+
+### GUI Versions
+Both GUI versions provide modern desktop interfaces with file browsers, progress bars, and visual feedback.
+
+**Python GUI (CustomTkinter):**
+```bash
+python3 interactive_recreation_gui.py
+```
+
+**Bash GUI (Zenity):**
+```bash
+./interactive-recreation_gui.sh
+```
+
+**GUI Features:**
+- Native file selection dialogs
+- Real-time image preview (Python GUI only)
+- Progress bar during processing
+- Error messages in popup dialogs
+- Automatic file opening after generation
 
 ## How It Works
 
@@ -127,13 +197,24 @@ Both implementations include comprehensive error handling for:
 
 ## Troubleshooting
 
-### Python Issues
+### Python CLI Issues
 - **ImportError**: Install missing modules with `pip install requests`
 - **File not found**: Ensure image paths are correct and accessible
 
-### Bash Issues
+### Python GUI Issues
+- **ModuleNotFoundError**: Install required modules with `pip install customtkinter Pillow`
+- **tkinter not found**: Ensure Python Tkinter is installed (`sudo apt-get install python3-tk`)
+- **Display issues**: Ensure X11/display server is running
+- **No GUI appears**: Check if running in headless environment
+
+### Bash CLI Issues
 - **Command not found**: Ensure curl, base64, and grep are installed
 - **Permission denied**: Make script executable with `chmod +x`
+
+### Bash GUI Issues
+- **zenity not found**: Install with `sudo apt-get install zenity`
+- **GUI not appearing**: Ensure DISPLAY variable is set and X11 is running
+- **zenity command failed**: Check if running in GUI environment
 
 ### Common API Issues
 - **Invalid API key**: Verify your Gemini API key is valid and has proper permissions
